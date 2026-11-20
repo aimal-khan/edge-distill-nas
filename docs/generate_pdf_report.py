@@ -115,8 +115,8 @@ def build_pdf():
     # Title & Metadata
     story.append(Paragraph("Edge Intelligence: Knowledge Distillation & Hardware-Aware NAS", title_style))
     story.append(Paragraph(
-        "<b>Author:</b> 21i-1701_A &nbsp;|&nbsp; <b>Course:</b> Edge Computing & Intelligent Systems &nbsp;|&nbsp; "
-        "<b>Repository:</b> github.com/aimal-khan/edge-distill-nas &nbsp;|&nbsp; <b>Date:</b> November 2026",
+        "<b>Author:</b> 21i-1701_A &nbsp;|&nbsp; <b>Course:</b> Edge Computing & Intelligent Systems &nbsp;|&nbsp; <b>Date:</b> November 2026<br/>"
+        "<b>GitHub Repository:</b> <a href=\"https://github.com/aimal-khan/edge-distill-nas\" color=\"#2B6CB0\"><u>https://github.com/aimal-khan/edge-distill-nas</u></a>",
         subtitle_style
     ))
     story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor("#2B6CB0"), spaceAfter=10))
