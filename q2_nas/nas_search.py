@@ -63,8 +63,13 @@ def get_loaders(resolution: int, batch_size: int, proxy_n: int = 5000):
         T.ToTensor(),
         T.Normalize(CIFAR10_MEAN, CIFAR10_STD),
     ])
-    train_ds = torchvision.datasets.CIFAR10(DATA, train=True,  download=True, transform=train_tf)
-    val_ds   = torchvision.datasets.CIFAR10(DATA, train=False, download=True, transform=val_tf)
+    alt_dir = os.path.abspath(os.path.join(BASE, "..", "..", "Assignment 03", "data", "cifar10"))
+    if os.path.exists(os.path.join(alt_dir, "train")):
+        train_ds = torchvision.datasets.ImageFolder(os.path.join(alt_dir, "train"), transform=train_tf)
+        val_ds   = torchvision.datasets.ImageFolder(os.path.join(alt_dir, "test"),  transform=val_tf)
+    else:
+        train_ds = torchvision.datasets.CIFAR10(DATA, train=True,  download=True, transform=train_tf)
+        val_ds   = torchvision.datasets.CIFAR10(DATA, train=False, download=True, transform=val_tf)
 
     train_ds = Subset(train_ds, range(min(proxy_n, len(train_ds))))
     val_ds   = Subset(val_ds,   range(min(1000,    len(val_ds))))

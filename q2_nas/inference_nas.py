@@ -84,7 +84,11 @@ def run_sample_inference(model, config, device, n=10):
         T.ToTensor(),
         T.Normalize(CIFAR10_MEAN, CIFAR10_STD),
     ])
-    ds = torchvision.datasets.CIFAR10(DATA, train=False, download=True, transform=val_tf)
+    alt_dir = os.path.abspath(os.path.join(BASE, "..", "..", "Assignment 03", "data", "cifar10", "test"))
+    if os.path.exists(alt_dir):
+        ds = torchvision.datasets.ImageFolder(alt_dir, transform=val_tf)
+    else:
+        ds = torchvision.datasets.CIFAR10(DATA, train=False, download=True, transform=val_tf)
     correct = 0
     model.to(device).eval()
     with torch.no_grad():

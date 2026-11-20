@@ -61,7 +61,11 @@ def main():
         T.ToTensor(),
         T.Normalize(CIFAR10_MEAN, CIFAR10_STD),
     ])
-    val_ds = torchvision.datasets.CIFAR10(DATA, train=False, download=True, transform=val_tf)
+    alt_dir = os.path.abspath(os.path.join(BASE, "..", "..", "Assignment 03", "data", "cifar10", "test"))
+    if os.path.exists(alt_dir):
+        val_ds = torchvision.datasets.ImageFolder(alt_dir, transform=val_tf)
+    else:
+        val_ds = torchvision.datasets.CIFAR10(DATA, train=False, download=True, transform=val_tf)
     if args.smoke_test:
         from torch.utils.data import Subset
         val_ds = Subset(val_ds, range(256))

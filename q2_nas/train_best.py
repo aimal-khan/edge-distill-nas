@@ -45,8 +45,13 @@ def get_loaders(resolution: int, batch_size: int, smoke: bool):
         T.ToTensor(),
         T.Normalize(CIFAR10_MEAN, CIFAR10_STD),
     ])
-    train_ds = torchvision.datasets.CIFAR10(DATA, train=True,  download=True, transform=train_tf)
-    val_ds   = torchvision.datasets.CIFAR10(DATA, train=False, download=True, transform=val_tf)
+    alt_dir = os.path.abspath(os.path.join(BASE, "..", "..", "Assignment 03", "data", "cifar10"))
+    if os.path.exists(os.path.join(alt_dir, "train")):
+        train_ds = torchvision.datasets.ImageFolder(os.path.join(alt_dir, "train"), transform=train_tf)
+        val_ds   = torchvision.datasets.ImageFolder(os.path.join(alt_dir, "test"),  transform=val_tf)
+    else:
+        train_ds = torchvision.datasets.CIFAR10(DATA, train=True,  download=True, transform=train_tf)
+        val_ds   = torchvision.datasets.CIFAR10(DATA, train=False, download=True, transform=val_tf)
     if smoke:
         from torch.utils.data import Subset
         train_ds = Subset(train_ds, range(512))
@@ -125,8 +130,8 @@ def main():
         print(f"  Ep {epoch}/{args.epochs} | train {tr_acc:.1f}% | val {va_acc:.1f}% | {time.time()-t0:.1f}s")
         history.append({"epoch": epoch, "train_acc": tr_acc, "val_acc": va_acc})
 
-        if va_acc > best_acc:
-            best_acc = va_acc
+        if va_acc >= best_acc or epoch == 1:
+            best_acc = max(best_acc, va_acc)
             torch.save({
                 "epoch": epoch, "model_state": model.state_dict(),
                 "val_acc": va_acc, "config": config,
