@@ -2,10 +2,6 @@
 
 End-to-end implementation of Knowledge Distillation (CIFAR-100) and Hardware-Aware Neural Architecture Search (CIFAR-10) for compute-constrained edge deployment.
 
-**Author:** 21i-1701_A  
-**Course:** Edge Computing & Intelligent Systems  
-**Repository:** [https://github.com/aimal-khan/edge-distill-nas](https://github.com/aimal-khan/edge-distill-nas)  
-
 ---
 
 ## Architecture Overview
