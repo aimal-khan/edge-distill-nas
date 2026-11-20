@@ -90,11 +90,11 @@ def train_student(name, train_ldr, val_ldr, epochs, device, smoke):
         va_acc = 100.0 * v_correct / v_total
 
         print(f"  [{name}] Ep {epoch}/{epochs} | "
-              f"train {tr_acc:.1f}% | val {va_acc:.1f}% | {time.time()-t0:.1f}s")
+              f"train {tr_acc:.1f}% | val {va_acc:.1f}% | {time.time()-t0:.1f}s", flush=True)
         history.append({"epoch": epoch, "train_acc": tr_acc, "val_acc": va_acc})
 
-        if va_acc > best_acc:
-            best_acc = va_acc
+        if va_acc >= best_acc or epoch == 1:
+            best_acc = max(best_acc, va_acc)
             torch.save({"epoch": epoch, "model_state": model.state_dict(),
                         "val_acc": va_acc, "model_name": name}, ckpt_path)
 
@@ -107,6 +107,8 @@ def train_student(name, train_ldr, val_ldr, epochs, device, smoke):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--model",      choices=list(STUDENT_REGISTRY) + ["all"], default="all",
+                        help="Which student model to train ('all' or specific)")
     parser.add_argument("--epochs",     type=int, default=10)
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--smoke-test", action="store_true")
@@ -120,8 +122,9 @@ def main():
 
     train_ldr, val_ldr = get_loaders(args.batch_size, args.smoke_test)
 
+    models_to_train = list(STUDENT_REGISTRY) if args.model == "all" else [args.model]
     results = {}
-    for name in STUDENT_REGISTRY:
+    for name in models_to_train:
         print(f"\n── Training baseline: {name} ──")
         acc = train_student(name, train_ldr, val_ldr, args.epochs, device, args.smoke_test)
         results[name] = acc

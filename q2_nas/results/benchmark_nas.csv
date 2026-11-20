@@ -1,0 +1,2 @@
+model,top1_acc_%,pth_size_mb,onnx_size_mb,params_M,pytorch_latency_ms,pytorch_latency_std,onnx_latency_ms,onnx_latency_std,resolution,config
+NAS_best,41.22,0.01,0.01,0.00,0.85,0.10,0.03,0.00,24,"{""num_layers"": 3, ""num_filters_base"": 16, ""filter_multiplier"": 1.0, ""kernel_size"": 3, ""use_depthwise"": true, ""activation"": ""gelu"", ""input_resolution"": 24, ""dropout_rate"": 0.09091248360355031}"

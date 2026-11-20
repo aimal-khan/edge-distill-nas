@@ -1,0 +1,11 @@
+{
+  "model": "squeezenet",
+  "best_val_acc": 2.25,
+  "history": [
+    {
+      "epoch": 1,
+      "train_acc": 1.574,
+      "val_acc": 2.25
+    }
+  ]
+}

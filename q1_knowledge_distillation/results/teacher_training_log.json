@@ -1,0 +1,12 @@
+{
+  "best_val_acc": 46.35,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 3.1088437412261962,
+      "train_acc": 31.104,
+      "val_loss": 2.495134357070923,
+      "val_acc": 46.35
+    }
+  ]
+}

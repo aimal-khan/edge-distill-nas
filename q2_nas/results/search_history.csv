@@ -1,0 +1,16 @@
+trial,val_acc,size_mb,latency_ms,peak_mem_mb,config,num_layers,num_filters_base,filter_multiplier,kernel_size,use_depthwise,activation,input_resolution,dropout_rate
+0,100.0,0.005992,1.511095750000102,0.002701,layers=3 filters=16×1.0 k=3 dw=True act=gelu res=24 drop=0.09,3,16,1.0,3,True,gelu,24,0.09091248360355031
+1,100.0,0.042152,0.4846604000000809,0.002173,layers=2 filters=32×1.0 k=3 dw=False act=hardswish res=32 drop=0.02,2,32,1.0,3,False,hardswish,32,0.023225206359998862
+2,100.0,6.218024,1.9532939999976406,0.002173,layers=5 filters=64×2.0 k=3 dw=False act=gelu res=32 drop=0.13,5,64,2.0,3,False,gelu,32,0.12938999080000846
+3,100.0,0.086824,3.0107979500030524,0.002093,layers=5 filters=64×1.0 k=3 dw=True act=hardswish res=24 drop=0.16,5,64,1.0,3,True,hardswish,24,0.16266516538163217
+4,100.0,0.01604,2.2817312000029233,0.002093,layers=3 filters=32×1.0 k=3 dw=True act=relu res=32 drop=0.35,3,32,1.0,3,True,relu,32,0.35342867192380856
+5,100.0,0.009448,1.816912500002843,0.002093,layers=5 filters=16×1.0 k=3 dw=True act=gelu res=32 drop=0.24,5,16,1.0,3,True,gelu,32,0.23610746258097465
+6,100.0,0.02436,2.0555813000029843,0.002093,layers=2 filters=32×2.0 k=5 dw=True act=gelu res=32 drop=0.45,2,32,2.0,5,True,gelu,32,0.4537832369630465
+7,100.0,0.01604,2.288958349998893,0.002093,layers=3 filters=32×1.0 k=3 dw=True act=hardswish res=32 drop=0.27,3,32,1.0,3,True,hardswish,32,0.26967112095782536
+8,100.0,0.019368,3.4418354999985468,0.002093,layers=6 filters=16×1.0 k=5 dw=True act=relu res=32 drop=0.47,6,16,1.0,5,True,relu,32,0.4714548519562596
+9,100.0,0.054824,2.3821855000051073,0.002093,layers=3 filters=32×2.0 k=3 dw=True act=gelu res=24 drop=0.14,3,32,2.0,3,True,gelu,24,0.13932323211830572
+10,100.0,0.198696,2.0247062500033053,0.002701,layers=5 filters=16×2.0 k=3 dw=True act=gelu res=24 drop=0.34,5,16,2.0,3,True,gelu,24,0.3350490475023765
+11,100.0,0.005992,1.6130647500062878,0.002093,layers=3 filters=16×1.0 k=3 dw=True act=gelu res=24 drop=0.03,3,16,1.0,3,True,gelu,24,0.033854785290819096
+12,100.0,0.010536,1.9408207499964192,0.002093,layers=2 filters=32×1.0 k=3 dw=True act=hardswish res=32 drop=0.01,2,32,1.0,3,True,hardswish,32,0.013759207141670409
+13,100.0,0.01188,0.5530250000020942,0.002173,layers=2 filters=16×1.0 k=3 dw=False act=hardswish res=32 drop=0.11,2,16,1.0,3,False,hardswish,32,0.1102618345546417
+14,100.0,0.004264,1.415393799999265,0.002093,layers=2 filters=16×1.0 k=3 dw=True act=gelu res=24 drop=0.34,2,16,1.0,3,True,gelu,24,0.3410276011662939

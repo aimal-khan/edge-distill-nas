@@ -1,0 +1,65 @@
+{
+  "best_val_acc": 41.22,
+  "history": [
+    {
+      "epoch": 1,
+      "train_acc": 23.284,
+      "val_acc": 30.4
+    },
+    {
+      "epoch": 2,
+      "train_acc": 30.978,
+      "val_acc": 34.7
+    },
+    {
+      "epoch": 3,
+      "train_acc": 34.27,
+      "val_acc": 37.31
+    },
+    {
+      "epoch": 4,
+      "train_acc": 35.846,
+      "val_acc": 37.8
+    },
+    {
+      "epoch": 5,
+      "train_acc": 36.864,
+      "val_acc": 38.81
+    },
+    {
+      "epoch": 6,
+      "train_acc": 37.676,
+      "val_acc": 40.38
+    },
+    {
+      "epoch": 7,
+      "train_acc": 38.264,
+      "val_acc": 40.87
+    },
+    {
+      "epoch": 8,
+      "train_acc": 38.746,
+      "val_acc": 40.98
+    },
+    {
+      "epoch": 9,
+      "train_acc": 38.528,
+      "val_acc": 40.94
+    },
+    {
+      "epoch": 10,
+      "train_acc": 38.942,
+      "val_acc": 41.22
+    }
+  ],
+  "config": {
+    "num_layers": 3,
+    "num_filters_base": 16,
+    "filter_multiplier": 1.0,
+    "kernel_size": 3,
+    "use_depthwise": true,
+    "activation": "gelu",
+    "input_resolution": 24,
+    "dropout_rate": 0.09091248360355031
+  }
+}

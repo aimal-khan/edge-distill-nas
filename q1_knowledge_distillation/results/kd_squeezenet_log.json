@@ -1,0 +1,12 @@
+{
+  "model": "squeezenet",
+  "mode": "kd",
+  "best_val_acc": 0.0,
+  "history": [
+    {
+      "epoch": 1,
+      "train_acc": 1.3671875,
+      "val_acc": 0.0
+    }
+  ]
+}

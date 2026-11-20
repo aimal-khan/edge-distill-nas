@@ -108,10 +108,11 @@ def main():
         for imgs, labels in train_ldr:
             imgs, labels = imgs.to(device), labels.to(device)
             optimizer.zero_grad()
-            loss = criterion(model(imgs), labels)
+            outputs = model(imgs)
+            loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
-            correct += (model(imgs).argmax(1) == labels).sum().item()
+            correct += (outputs.argmax(1) == labels).sum().item()
             total   += imgs.size(0)
         # shortcut: reuse forward above is fine for accuracy display only
         tr_acc = 100.0 * correct / total

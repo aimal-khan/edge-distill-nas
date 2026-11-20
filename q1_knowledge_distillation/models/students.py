@@ -64,6 +64,20 @@ class StudentSqueezeNet(nn.Module):
 # ---------------------------------------------------------------------------
 # EfficientNet-Lite0  (EfficientNet-B0 without SE blocks, fixed resolution)
 # ---------------------------------------------------------------------------
+class SqueezeExcitationBypass(nn.Module):
+    """Bypasses SE block computation to strictly comply with Lite0 spec while retaining parameter keys."""
+    def __init__(self, original_se):
+        super().__init__()
+        self.avgpool = original_se.avgpool
+        self.fc1     = original_se.fc1
+        self.fc2     = original_se.fc2
+        self.activation       = nn.Identity()
+        self.scale_activation = nn.Identity()
+
+    def forward(self, input):
+        return input
+
+
 class StudentEfficientNetLite0(nn.Module):
     """
     EfficientNet-Lite0: EfficientNet-B0 backbone with Squeeze-and-Excitation
@@ -75,14 +89,11 @@ class StudentEfficientNetLite0(nn.Module):
         weights = models.EfficientNet_B0_Weights.IMAGENET1K_V1 if pretrained else None
         base = models.efficientnet_b0(weights=weights)
 
-        # Disable SE blocks to match Lite0 spec
-        for module in base.modules():
-            if isinstance(module, models.efficientnet.SqueezeExcitation):
-                module.activation = nn.Identity()
-                module.scale_activation = nn.Identity()
-                # Zero-out scale so SE path is bypassed
-                nn.init.ones_(module.fc2.weight)
-                nn.init.zeros_(module.fc2.bias)
+        # Bypass SE blocks cleanly to match Lite0 spec without numerical explosion
+        for parent in base.modules():
+            for name, child in list(parent.named_children()):
+                if isinstance(child, models.efficientnet.SqueezeExcitation):
+                    setattr(parent, name, SqueezeExcitationBypass(child))
 
         self.features    = base.features        # (B, 1280, H, W)
         self.pool        = nn.AdaptiveAvgPool2d(1)

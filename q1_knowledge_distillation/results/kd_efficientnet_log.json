@@ -1,0 +1,12 @@
+{
+  "model": "efficientnet",
+  "mode": "kd",
+  "best_val_acc": 1.5625,
+  "history": [
+    {
+      "epoch": 1,
+      "train_acc": 0.5859375,
+      "val_acc": 1.5625
+    }
+  ]
+}

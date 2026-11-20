@@ -1,0 +1,11 @@
+{
+  "model": "efficientnet",
+  "best_val_acc": 1.5625,
+  "history": [
+    {
+      "epoch": 1,
+      "train_acc": 1.3671875,
+      "val_acc": 1.5625
+    }
+  ]
+}

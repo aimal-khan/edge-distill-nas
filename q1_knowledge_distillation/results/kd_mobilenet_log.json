@@ -1,0 +1,12 @@
+{
+  "model": "mobilenet",
+  "mode": "kd",
+  "best_val_acc": 3.90625,
+  "history": [
+    {
+      "epoch": 1,
+      "train_acc": 2.9296875,
+      "val_acc": 3.90625
+    }
+  ]
+}

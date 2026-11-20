@@ -127,8 +127,8 @@ def main():
                "val_loss": va_loss, "val_acc": va_acc}
         history.append(row)
 
-        if va_acc > best_acc:
-            best_acc = va_acc
+        if va_acc >= best_acc or epoch == 1:
+            best_acc = max(best_acc, va_acc)
             torch.save({"epoch": epoch, "model_state": model.state_dict(),
                         "val_acc": va_acc, "args": vars(args)}, CKPT)
             print(f"  → Saved checkpoint (val_acc={va_acc:.2f}%)")

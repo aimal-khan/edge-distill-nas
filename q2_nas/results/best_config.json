@@ -1,0 +1,12 @@
+{
+  "num_layers": 3,
+  "num_filters_base": 16,
+  "filter_multiplier": 1.0,
+  "kernel_size": 3,
+  "use_depthwise": true,
+  "activation": "gelu",
+  "input_resolution": 24,
+  "dropout_rate": 0.09091248360355031,
+  "_val_acc": 100.0,
+  "_trial_num": 0
+}

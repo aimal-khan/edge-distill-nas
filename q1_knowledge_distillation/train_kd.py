@@ -119,11 +119,11 @@ def train_kd_student(name, teacher, train_ldr, val_ldr, args, device):
         va_acc = 100.0 * v_correct / v_total
 
         print(f"  [KD-{name}] Ep {epoch}/{args.epochs} | "
-              f"train {tr_acc:.1f}% | val {va_acc:.1f}% | {time.time()-t0:.1f}s")
+              f"train {tr_acc:.1f}% | val {va_acc:.1f}% | {time.time()-t0:.1f}s", flush=True)
         history.append({"epoch": epoch, "train_acc": tr_acc, "val_acc": va_acc})
 
-        if va_acc > best_acc:
-            best_acc = va_acc
+        if va_acc >= best_acc or epoch == 1:
+            best_acc = max(best_acc, va_acc)
             torch.save({
                 "epoch": epoch,
                 "model_state":   student.state_dict(),
@@ -141,6 +141,8 @@ def train_kd_student(name, teacher, train_ldr, val_ldr, args, device):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--model",       choices=list(STUDENT_REGISTRY) + ["all"], default="all",
+                        help="Which student model to train ('all' or specific)")
     parser.add_argument("--epochs",      type=int,   default=10)
     parser.add_argument("--batch-size",  type=int,   default=128)
     parser.add_argument("--temperature", type=float, default=4.0)
@@ -170,8 +172,9 @@ def main():
 
     train_ldr, val_ldr = get_loaders(args.batch_size, args.smoke_test)
 
+    models_to_train = list(STUDENT_REGISTRY) if args.model == "all" else [args.model]
     results = {}
-    for name in STUDENT_REGISTRY:
+    for name in models_to_train:
         print(f"\n── KD training: {name} ──")
         acc = train_kd_student(name, teacher, train_ldr, val_ldr, args, device)
         results[name] = acc
